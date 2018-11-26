@@ -29,16 +29,16 @@ data = read.csv("morphometrics_means.csv", head=TRUE)
 str(data)
 
 # sets site name to maximum width so they wrap on the graph
-# data$site=str_wrap(data$site, width=6) 
+# data$site=str_wrap(data$site, width=6)
 # maintains site order as imported
-# data$site=factor(data$site, levels=unique(data$site)) 
+# data$site=factor(data$site, levels=unique(data$site))
 # maintains depth order as imported
-data$depth=factor(data$depth, levels=unique(data$depth)) 
+data$depth=factor(data$depth, levels=unique(data$depth))
 
 # sets bank name to maximum width so they wrap on the graph
-# data$bank=str_wrap(data$bank, width=6) 
+# data$bank=str_wrap(data$bank, width=6)
 # maintains bank order as imported
-data$bank=factor(data$bank, levels=unique(data$bank)) 
+data$bank=factor(data$bank, levels=unique(data$bank))
 
 #------------------
 # Kruskal-Wallis tests for each metric
@@ -98,7 +98,7 @@ scale <- function(x) sprintf("%.1f", x)
 # plots boxplot of cd with sample points
 # palette forces colors from above color palette
 # theme() removes both axis labels
-cd <- ggboxplot(data, x="bank", y="cd", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Corallite Diameter (CD)", fill='Depth') + theme_bw() + theme(axis.title.y=element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5)) + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cd.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+cd <- ggboxplot(data, x="bank", y="cd", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Corallite Diameter (CD)", fill='Depth') + theme_bw() + theme(axis.title.y=element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5)) + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cd.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 cd
 
 #takes the legend and saves it as a separate object (grob)
@@ -111,28 +111,28 @@ get_legend<-function(cd){
 legend=get_legend(cd)
 
 # replots cd, without legend using guides()
-cd <- ggboxplot(data, x="bank", y="cd", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Corallite Diameter (CD)") + theme_bw() + theme(axis.title.y=element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cd.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+cd <- ggboxplot(data, x="bank", y="cd", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Corallite Diameter (CD)") + theme_bw() + theme(axis.title.y=element_blank(), axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cd.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 cd
 
 # has x axis labels
-th <- ggboxplot(data, x="bank", y="th", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Theca Height (TH)") + theme_bw() + theme(axis.title.y=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=th.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+th <- ggboxplot(data, x="bank", y="th", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Theca Height (TH)") + theme_bw() + theme(axis.title.y=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=th.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 th
 
 # has y axis labels
-cs <- ggboxplot(data, x="bank", y="cs", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Corallite Spacing (CS)") + theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cs.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+cs <- ggboxplot(data, x="bank", y="cs", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Corallite Spacing (CS)") + theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cs.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 cs
 
 # has y axes labels
-ch <- ggboxplot(data, x="bank", y="ch", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Corallite Height (CH)") + theme_bw() + theme(plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=ch.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+ch <- ggboxplot(data, x="bank", y="ch", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Corallite Height (CH)") + theme_bw() + theme(plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=ch.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 ch
 
 #creates plot object with a 2x2 grid of plots and legend
 #forces layout to be CD, CS, TH, CH, then legend taking up all of column 3 in center
 plot=grid.arrange(cs, ch, cd, th, legend, ncol=3, nrow=2, layout_matrix=cbind(c(1,2),c(3,4),c(5,5)), widths=c(3,2.8,1), heights=c(2.6,3))
 
-#saves plot as PDF and EPS
-ggsave("CD_CS_TH_CH_meansfig_boxplot.pdf", plot= plot, width=10, height=7, units="in", dpi=300)
-ggsave("CD_CS_TH_CH_meansfig_boxplot.eps", plot= plot, width=10, height=7, units="in", dpi=300)
+#saves plot as TIFF and EPS
+ggsave("CD_CS_TH_CH_meansfig_boxplot.tiff", plot= plot, width=7.5, height=5.3, units="in", dpi=300)
+ggsave("CD_CS_TH_CH_meansfig_boxplot.eps", plot= plot, width=7.5, height=5.3, units="in", dpi=300)
 
 #-------------------
 # other metrics for supplemental
@@ -140,7 +140,7 @@ ggsave("CD_CS_TH_CH_meansfig_boxplot.eps", plot= plot, width=10, height=7, units
 # plots boxplot of cw with sample points
 # palette forces colors from above color palette
 # theme() removes x axis labels
-cw <- ggboxplot(data, x="bank", y="cw", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Columella Width (CW)", fill='Depth') + theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5)) + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cw.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+cw <- ggboxplot(data, x="bank", y="cw", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Columella Width (CW)", fill='Depth') + theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5)) + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cw.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 cw
 
 #takes the legend and saves it as a separate object (grob)
@@ -153,28 +153,28 @@ get_legend<-function(cw){
 legend=get_legend(cw)
 
 # replots cw, without legend using guides()
-cw <- ggboxplot(data, x="bank", y="cw", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Columella Width (CW)", fill='Depth') + theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cw.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+cw <- ggboxplot(data, x="bank", y="cw", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Columella Width (CW)", fill='Depth') + theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=cw.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 cw
 
 # has no axes labels
-t1c <- ggboxplot(data, x="bank", y="t1c", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Thickness 1st Cycle Costa (T1C)") + theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.title.y=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=t1c.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+t1c <- ggboxplot(data, x="bank", y="t1c", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Thickness 1st Cycle Costa (T1C)") + theme_bw() + theme(axis.title.x=element_blank(), axis.text.x=element_blank(), axis.title.y=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=t1c.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 t1c
 
 # has both axes labels
-l1s <- ggboxplot(data, x="bank", y="l1s", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Length 1st Cycle Septa (L1S)") + theme_bw() + theme(plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=l1s.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+l1s <- ggboxplot(data, x="bank", y="l1s", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Length 1st Cycle Septa (L1S)") + theme_bw() + theme(plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=l1s.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 l1s
 
 # has x axis labels
-l4s <- ggboxplot(data, x="bank", y="l4s", color="grey30", fill= "depth", palette= depth_colors, add="jitter", width=0.7, size=0.75) + labs(x="Site", y="Size (mm)", title="Length 4th Cycle Septa (L4S)") + theme_bw() + theme(axis.title.y=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=l4s.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
+l4s <- ggboxplot(data, x="bank", y="l4s", color="grey30", fill= "depth", palette= depth_colors, add="jitter", add.params=list(size=1, jitter=0.5), width=0.7, size=0.5) + labs(x="Site", y="Size (mm)", title="Length 4th Cycle Septa (L4S)") + theme_bw() + theme(axis.title.y=element_blank(), plot.title = element_text(hjust=0.5), legend.position = "none") + stat_compare_means(aes(label = paste0("p=", ..p.format..)), label.x=4.5, hjust=0.5, label.y=0, vjust=-1) +geom_text(data=l4s.list, aes(x = Group, y=0, vjust=-2.5, label=Letter)) + scale_x_discrete(breaks=c("west.mesophotic","west.shallow","east.mesophotic","east.shallow","bright.mesophotic","mcgrail.mesophotic","pulley.mesophotic","tortugas.shallow"),labels=c("WFGB","","EFGB","","BRT","MCG","PRG","DRT")) + scale_y_continuous(labels=scale)
 l4s
 
 #creates plot object with a 2x2 grid of plots and legend
 #forces layout to be CD, CS, TH, CH, then legend taking up all of column 3 in center
 plot2=grid.arrange(cw, l1s, t1c, l4s, legend, ncol=3, nrow=2, layout_matrix=cbind(c(1,2),c(3,4),c(5,5)), widths=c(3,2.8,1), heights=c(2.6,3))
 
-#saves plot as PDF and EPS
-ggsave("CW_T1C_L1S_L4S_supp_boxplot.pdf", plot= plot2, width=10, height=7, units="in", dpi=300)
-ggsave("CW_T1C_L1S_L4S_supp_boxplot.eps", plot= plot2, width=10, height=7, units="in", dpi=300)
+#saves plot as TIFF and EPS
+ggsave("CW_T1C_L1S_L4S_supp_boxplot.tiff", plot= plot2, width=7.5, height=5.3, units="in", dpi=300)
+ggsave("CW_T1C_L1S_L4S_supp_boxplot.eps", plot= plot2, width=7.5, height=5.3, units="in", dpi=300)
 
 #-------------------
 # normality tests
@@ -219,7 +219,7 @@ shapiro.test(data$cs.log)
 
 # exporting EPS
 setEPS()
-postscript("metrics_hist.eps", height=6, width=12)
+postscript("metrics_hist.eps", height=4.25, width=7.5)
 par(mfrow=c(2,3))
 hist(data$cd, breaks=50, xlab= NA, main="CD", col="grey50")
 hist(data$cw, breaks= 50, xlab=NA, ylab=NA, main ="CW", col="grey50")
@@ -231,18 +231,18 @@ hist(data$l1s, breaks= 50, xlab="Size (mm)", main ="L1S", col="grey50")
 abline(v = 1.15, col="darkorange", lwd=4)
 dev.off()
 
-# exporting PDF
-pdf("metrics_hist.pdf", height=6, width=12)
-par(mfrow=c(2,3))
-hist(data$cd, breaks=50, xlab= NA, main="CD", col="grey50")
-hist(data$cw, breaks= 50, xlab=NA, ylab=NA, main ="CW", col="grey50")
-hist(data$cs, breaks= 50, xlab= NA,  ylab=NA, main ="CS", col="grey50")
-abline(v = 8.4, col="darkorange", lwd=4)
-hist(data$th, breaks= 50, xlab="Size (mm)", main ="TH", col="grey50")
-hist(data$ch, breaks= 50, xlab= "Size (mm)",  ylab=NA, main ="CH", col="grey50")
-hist(data$l1s, breaks= 50, xlab="Size (mm)", main ="L1S", col="grey50")
-abline(v = 1.15, col="darkorange", lwd=4)
-dev.off()
+# exporting TIFF
+# tiff("metrics_hist.tiff", height=4.25, width=7.5)
+# par(mfrow=c(2,3))
+# hist(data$cd, breaks=50, xlab= NA, main="CD", col="grey50")
+# hist(data$cw, breaks= 50, xlab=NA, ylab=NA, main ="CW", col="grey50")
+# hist(data$cs, breaks= 50, xlab= NA,  ylab=NA, main ="CS", col="grey50")
+# abline(v = 8.4, col="darkorange", lwd=2.5)
+# hist(data$th, breaks= 50, xlab="Size (mm)", main ="TH", col="grey50")
+# hist(data$ch, breaks= 50, xlab= "Size (mm)",  ylab=NA, main ="CH", col="grey50")
+# hist(data$l1s, breaks= 50, xlab="Size (mm)", main ="L1S", col="grey50")
+# abline(v = 1.15, col="darkorange", lwd=2.5)
+# dev.off()
 
 # hist(data$l4s, breaks= 100, xlab="size in mm", main ="L4S")
 # hist(data$t1c, breaks= 100, xlab="size in mm", main ="T1C")
