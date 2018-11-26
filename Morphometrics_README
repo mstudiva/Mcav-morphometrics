@@ -1,0 +1,76 @@
+Morphometrics Data Collection Protocol
+Created by G. O’Neal and A. Alker
+
+------------------------------
+Camera Setup
+1.	Extend tripod legs
+    a.	Place 2 legs on the edge of table
+    b.	Set tripod height 10-15 cm from table edge
+2.	Release pin for camera plate
+3.	Screw camera (Canon G16) into plate
+4.	Replace camera and plate on tripod
+5.	Point camera directly downwards
+6.	Put bubble level on camera screen
+7.	Camera Settings: Program > Macro > Manual focus (press ^ on wheel and cycle down to focus)
+    a.	Adjust exposure for lighting
+
+------------------------------
+Corallite Placement & Measurement
+1.	When starting with new sample, take picture of bag and sample # as a placekeeper
+2.	Place frag on bed of aluminum foil to make corallite parallel
+    a.	Make sure the angle of the shot does not expose layers of septa below
+        i.	Avoided by taking a direct overhead shot of corallite
+3.	Select 5 corallites for measurements
+    a.	Guidelines for selection:
+        i.	Cannot be near margin of coral
+        ii.	Cannot be near broken edge of coral
+        iii.	No new corallites
+        iv.	Must have neighbors
+4.	Use dental pick to help center corallite in frame
+    a.	Dental pick must be in each picture as a scale
+        i.	Tick=1mm (from start of one line to the end of 1 line)
+5.	Corallite Height (CH) & Theca Height (TH) must be measured using the calipers
+    a.	Take 4 measurements per metric (1 per quadrant- see Figure 1)
+6.	Corallite density (CS) can be measured with calipers or on Image J (depending on quality of photo and/or fragment curvature
+    a.	CS is measured from the center of one corallite to the next for all of the polyps neighboring
+        i.	In excel, Create separate spreadsheet for CS because of varying #s of neighbors/corallite  
+
+------------------------------
+Image Analysis
+------------------------------
+Photoshop Editing
+1.	Download pictures onto the desktop of the computer with Photoshop
+2.	Create a Subfolder within this folder labeled BW Corrections
+3.	In Photoshop click File>Automate>Batch
+    a.	 Play> Black&White
+b.	Source> Folder created on desktop with pictures
+    c.	Destination> BW Corrections
+    d.	Click Ok
+4.	Press Enter for every photo in batch
+5.	Move folder to common drive
+
+------------------------------
+Image J Analysis
+1.	File> Open Image
+2.	+ zooms in on image, - zooms out, place cursor where you would like to zoom
+3.	 Zoom in to caliper
+    a.	Click the line tool and create a line from the end of one tick to the beginning of another
+        i.	Includes small black line
+    b.	Click Analyze>Set Scale
+        i.	Known Distance: 1
+        ii.	Unit of length: mm
+4.	Zoom into corallite
+5.	Draw a line for your measurement
+    a.	Click Analyze>Measure
+    b.	A results box will pop up
+        i.	Length (the last column) is your measurement in mm
+    c.	For CD and CW refer to Figures 2 & 3
+    d.	 L1S, L4S, and T1C, will be measured using Figure 1 above and pictures below as references
+        i.	1 measurement per Quadrant
+6.	For Excel and data entry organization, refer to template spreadsheet
+ 
+------------------------------
+Statistical Analysis
+1.	For plot generation and pairwise statistical analyses, follow the instructions in the R scripts “Morphometrics_figures.R” and “Morphotype_figures.R”
+2.	For multivariate statistics in Primer v7, follow the instructions in the Primer user manual by Clarke and Gorley and in the PERMANOVA+ manual by Anderson et al. These manuals describe the statistical tests used in Studivan et al. 2018 in comprehensive detail.
+3.	For comparison of morphological variation to genotypic variation, follow the appropriate sections (GenAlEx, Structure, Structure Harvester, CLUMPP, Distruct) of the “microsat_analysis_README” in the “Mcav-microsats” repository.
